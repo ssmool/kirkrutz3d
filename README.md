@@ -74,6 +74,10 @@ It turns “raw pixels” into “ready-to-use assets” in minutes.
 
 This is the kind of pipeline studios pay thousands for — now accessible to anyone with Python, Blender, and curiosity.
 
+TESTS | RUNNING AND EXAMPLE FROM CLI:
+
+![DRACULA EXAMPLE](./examples/docs_example.MD)
+
 📦 Project Structure
 
 The project is divided into 4 monolithic modules, each responsible for a stage in the AI+3D workflow:
