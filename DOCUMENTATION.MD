@@ -1,16 +1,17 @@
-Below is a **complete, polished, professional module-by-module documentation set** for the **KIR KRUTZ 3D** project.
-Each module includes:
-✔ Overview
-✔ Responsibilities
-✔ Input / Output
-✔ CLI usage
-✔ Internal Workflow
-✔ API functions
-✔ Notes, limitations, and tips
+## KIR KRUTZ 3D
 
-Ready for direct placement into a `/docs/` folder or appended to README.
+![Python KIRKRUTZ3D Logo](./assets/kirkrutz3d.gif)
 
----
+AI-Augmented Image → Axis Maps → Meshes → 3D Models → Sprites → Online Upload
+(Featuring LionsMapper AI + Blender Pipeline + Multi-stage Generators)
+
+Repository: github.com/ssmool/kirkrutz3d
+
+🚀 Introduction
+
+KIR KRUTZ 3D is an all-in-one AI-powered pipeline that turns ordinary bitmap images into 3D meshes, lithophanes, combined GLB models, spritesheets, and even automatic uploads via transfer.sh — all using a semi-modular stack of Python scripts, Blender automation, and LionsMapper AI.
+
+## KIRL KRUTZ 3D - DOCS FOR REFERENCE
 
 # 📘 **KIR KRUTZ 3D – Full Module Documentation**
 
