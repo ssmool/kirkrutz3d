@@ -128,7 +128,7 @@ Here is a rendered preview of the Dracula mesh generated from the attached image
 
 (I rendered this via matplotlib 3D mesh plotting)
 
-![dracula-3d](attachment://dracula_3d_plot.png)
+![dracula-3d](cute-dracula-clipart-cartoon-style-dracula-character-vector-characters_596875_wh1200.png)
 
 ---
 
