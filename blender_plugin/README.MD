@@ -30,7 +30,7 @@ Below is a **fully-ready Blender Add-on (plugin)** that:
 ### ✅ Adds a *KirkRutz3D*-style panel in the **3D Viewport → N-Panel**
 
 1. In Blender:
-   **Edit → Preferences → Add-ons → Install… → choose the ZIP**
+   **Edit → Preferences → Add-ons → Install… → choose the ZIP (kirkrutz3d_mapper.zip)**
 
 2. Enable the add-on.
 
