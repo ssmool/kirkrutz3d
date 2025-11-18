@@ -11,7 +11,7 @@ Repository: github.com/ssmool/kirkrutz3d
 
 KIR KRUTZ 3D is an all-in-one AI-powered pipeline that turns ordinary bitmap images into 3D meshes, lithophanes, combined GLB models, spritesheets, and even automatic uploads via transfer.sh — all using a semi-modular stack of Python scripts, Blender automation, and LionsMapper AI.
 
-![Python KIRKRUTZ3D DOCS](DOCUMENTATION.MD)
+![Python KIRKRUTZ3D DOCS](../docs_example/docs_example.MD)
 
 🎯 Core Goal
 
