@@ -80,4 +80,6 @@ TESTS | RUNNING AND EXAMPLE FROM CLI:
 
 📦 Project Structure
 
-The project is divided into 4 monolithic modules, each responsible for a stage in the AI+3D workflow:
+The project is divided into 4 monolithic modules, each responsible for a stage in the AI+3D workflow and blender plugin:
+
+![To Access Blender Plugin and Manual:](./blender_plugin/README.MD)
