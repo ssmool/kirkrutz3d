@@ -1,6 +1,6 @@
 ## KIR KRUTZ 3D
 
-![Python KIRKRUTZ3D Logo](./assets/kirkrutz3d.gif)
+![Python KIRKRUTZ3D Logo](../assets/kirkrutz3d.gif)
 
 AI-Augmented Image → Axis Maps → Meshes → 3D Models → Sprites → Online Upload
 (Featuring LionsMapper AI + Blender Pipeline + Multi-stage Generators)
