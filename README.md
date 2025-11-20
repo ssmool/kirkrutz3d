@@ -76,7 +76,7 @@ This is the kind of pipeline studios pay thousands for — now accessible to any
 
 TESTS | RUNNING AND EXAMPLE FROM CLI:
 
-![DRACULA EXAMPLE](./docs_examples/docs_example.MD)
+![DRACULA EXAMPLE](./docs_example/docs_example.MD)
 
 📦 Project Structure
 
