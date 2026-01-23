@@ -1,6 +1,6 @@
-# bitmap_3d.py
-# Auto-generated KRIRKRUTZ3D generator. Run inside Blender:
-# blender --background --python bitmap_3d.py -- results.colors.json --image-dir . --out-dir ./blender_out --sample 4 --height-scale 0.02 --rgb-tolerance 12 --solidify 0.5 --export-format obj
+# image_to_3d_blender_lithophane.py
+# Auto-generated lithophane generator. Run inside Blender:
+# blender --background --python image_to_3d_blender_lithophane.py -- results.colors.json --image-dir . --out-dir ./blender_out --sample 4 --height-scale 0.02 --rgb-tolerance 12 --solidify 0.5 --export-format obj
 
 import bpy, os, sys, json, math
 from mathutils import Vector
@@ -13,7 +13,7 @@ def parse_argv():
         argv = []
     import argparse
     p = argparse.ArgumentParser()
-    p.add_argument("results_json", default="result.colors.json")
+    p.add_argument("results_json")
     p.add_argument("--image-dir", default=".")
     p.add_argument("--out-dir", default="./blender_out")
     p.add_argument("--sample", type=int, default=4)
@@ -83,9 +83,11 @@ def build_grid_mesh(name, grid, wpts, hpts, pxscale):
 def main():
     args = parse_argv()
     ensure_dir(args.out_dir)
-    with open(args.results_json,'r',encoding='utf-8') as f:
-        data=json.load(f)
-        image_name = data.get("image")
+    image_name = ''
+    with open(args.results_json,'r',encoding='utf-8') as f: 
+        data = json.load(f)
+        print(str(args.results_json))
+        image_name = data.get('image')
     if not image_name:
         print("JSON missing 'image'"); return
     img_path = os.path.join(args.image_dir, image_name)
@@ -132,8 +134,39 @@ def main():
         bpy.ops.object.modifier_apply(modifier=mod.name)
         outfile = os.path.join(args.out_dir, name + "." + export_fmt)
         bpy.ops.object.select_all(action='DESELECT'); obj.select_set(True); bpy.context.view_layer.objects.active = obj
-        if export_fmt == "obj": bpy.ops.wm.obj_export(filepath=outfile)
-        elif export_fmt == "stl": bpy.ops.wm.obj_export(filepath=outfile)
+        #if export_fmt == "obj": bpy.ops.export_scene.obj(filepath=outfile, use_selection=True, use_materials=True)
+        if export_fmt == "obj": bpy.ops.wm.obj_export(filepath=outfile, export_selected_objects=True)
+        elif export_fmt == "stl": bpy.ops.wm.obj_export(filepath=outfile, use_selection=True)
         print("Exported", outfile)
+        output_file = "final.obj"
+        directory = args.out_dir 
+        output_file = "final.obj"
+        bpy.ops.object.select_all(action='DESELECT')
+        bpy.ops.object.select_by_type(type='MESH')
+        bpy.ops.object.delete()
+        obj_files = [f for f in os.listdir(directory) if f.endswith(".obj")]
+        imported_objects = []
+        for file_name in obj_files:
+            path_to_file = os.path.join(directory, file_name)
+            #bpy.ops.import_scene.obj(filepath=path_to_file)
+            bpy.ops.wm.obj_import(filepath=path_to_file)
+            # Add newly imported objects to a list
+            imported_objects.extend(bpy.context.selected_objects)
+        if len(imported_objects) > 1:
+            # Select all imported objects
+            for obj in imported_objects:
+                obj.select_set(True)
+            # Set the active object to the first one for joining
+            bpy.context.view_layer.objects.active = imported_objects[0]
+            # Join selected
+            bpy.ops.object.join()
+            # Rename to final object
+            bpy.context.view_layer.objects.active.name = "FinalObject"
+
+        # 5. Export the final joined mesh
+        final_path = os.path.join(directory, output_file)
+        #bpy.ops.export_scene.obj(filepath=final_path, use_selection=True)
+        bpy.ops.wm.obj_export(filepath=final_path)
+        print(f"Finished. Combined {len(obj_files)} files into {final_path}")
 
 if __name__ == "__main__": main()

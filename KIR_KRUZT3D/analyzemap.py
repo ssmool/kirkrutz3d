@@ -1,17 +1,17 @@
-python analyzemap.py map.png --top 50 --threads 6 --csv --emit-blender
+#python analyzemap.py map.png --top 50 --threads 6 --csv --emit-blender
 
-map.colors.json (with per-color params auto-set)
+#map.colors.json (with per-color params auto-set)
 
-map.colors.csv
+#map.colors.csv
 
-map.svg
+#map.svg
 
-map.report.md / map.report.txt
+#map.report.md / map.report.txt
 
-image_to_3d_blender_lithophane.py
-blender --background --python image_to_3d_blender_lithophane.py -- map.colors.json --image-dir . --out-dir ./blender_out --sample 4 --height-scale 0.02 --rgb-tolerance 12 --solidify 0.6 --export-format obj
+#image_to_3d_blender_lithophane.py
+#blender --background --python image_to_3d_blender_lithophane.py -- map.colors.json --image-dir . --out-dir ./blender_out --sample 4 --height-scale #0.02 --rgb-tolerance 12 --solidify 0.6 --export-format obj
 
-analyzemap.py
+#analyzemap.py
 
 #!/usr/bin/env python3
 """
