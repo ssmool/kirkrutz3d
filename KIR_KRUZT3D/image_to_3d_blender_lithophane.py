@@ -134,7 +134,13 @@ def main():
         bpy.ops.object.modifier_apply(modifier=mod.name)
         outfile = os.path.join(args.out_dir, name + "." + export_fmt)
         bpy.ops.object.select_all(action='DESELECT'); obj.select_set(True); bpy.context.view_layer.objects.active = obj
-        #if export_fmt == "obj": bpy.ops.export_scene.obj(filepath=outfile, use_selection=True, use_materials=True)
+        active_object = bpy.context.active_object
+        if active_object:
+            my_color = (rgb)
+            set_object_shader_color(active_object, my_color)
+            print(f"Color applied to {active_object.name}")
+        else:
+            print("No active object selected.")
         if export_fmt == "obj": bpy.ops.wm.obj_export(filepath=outfile, export_selected_objects=True)
         elif export_fmt == "stl": bpy.ops.wm.obj_export(filepath=outfile, use_selection=True)
         print("Exported", outfile)
@@ -151,12 +157,28 @@ def main():
         imported_objects.extend(bpy.context.selected_objects)
         if len(imported_objects) > 1:
             for obj in imported_objects:
-                obj.select_set(True)
+                if obj in bpy.data.objects:
+                    obj = bpy.data.object[obj]
+                    obj.select_set(True)
             bpy.context.view_layer.objects.active = imported_objects[0]
             bpy.ops.object.join()
             bpy.context.view_layer.objects.active.name = "FinalObject"
     final_path = os.path.join(directory, output_file)
     bpy.ops.wm.obj_export(filepath=final_path)
     print(f"Finished. Combined {len(obj_files)} files into {final_path}")
+
+def set_object_shader_color(obj, color_rgb):
+    if not obj.data.materials:
+        mat = bpy.data.materials.new(name=f"Material_{obj.name}")
+        obj.data.materials.append(mat)
+    else:
+        mat = obj.data.materials[0]
+    mat.use_nodes = True
+    bsdf = mat.node_tree.nodes.get("Principled BSDF")    
+    if bsdf:
+        bsdf.inputs['Base Color'].default_value = (color_rgb[0], color_rgb[1], color_rgb[2], 1.0)
+        mat.diffuse_color = (color_rgb[0], color_rgb[1], color_rgb[2], 1.0)
+    else:
+        print("Principled BSDF node not found in material.")
 
 if __name__ == "__main__": main()
