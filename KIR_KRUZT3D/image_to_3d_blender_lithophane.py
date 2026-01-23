@@ -138,35 +138,25 @@ def main():
         if export_fmt == "obj": bpy.ops.wm.obj_export(filepath=outfile, export_selected_objects=True)
         elif export_fmt == "stl": bpy.ops.wm.obj_export(filepath=outfile, use_selection=True)
         print("Exported", outfile)
-        output_file = "final.obj"
-        directory = args.out_dir 
-        output_file = "final.obj"
-        bpy.ops.object.select_all(action='DESELECT')
-        bpy.ops.object.select_by_type(type='MESH')
-        bpy.ops.object.delete()
-        obj_files = [f for f in os.listdir(directory) if f.endswith(".obj")]
-        imported_objects = []
-        for file_name in obj_files:
-            path_to_file = os.path.join(directory, file_name)
-            #bpy.ops.import_scene.obj(filepath=path_to_file)
-            bpy.ops.wm.obj_import(filepath=path_to_file)
-            # Add newly imported objects to a list
-            imported_objects.extend(bpy.context.selected_objects)
+    directory = args.out_dir 
+    output_file = "final.obj"
+    bpy.ops.object.select_all(action='DESELECT')
+    bpy.ops.object.select_by_type(type='MESH')
+    bpy.ops.object.delete()
+    obj_files = [f for f in os.listdir(directory) if f.endswith(".obj")]
+    imported_objects = []
+    for file_name in obj_files:
+        path_to_file = os.path.join(directory, file_name)
+        bpy.ops.wm.obj_import(filepath=path_to_file)
+        imported_objects.extend(bpy.context.selected_objects)
         if len(imported_objects) > 1:
-            # Select all imported objects
             for obj in imported_objects:
                 obj.select_set(True)
-            # Set the active object to the first one for joining
             bpy.context.view_layer.objects.active = imported_objects[0]
-            # Join selected
             bpy.ops.object.join()
-            # Rename to final object
             bpy.context.view_layer.objects.active.name = "FinalObject"
-
-        # 5. Export the final joined mesh
-        final_path = os.path.join(directory, output_file)
-        #bpy.ops.export_scene.obj(filepath=final_path, use_selection=True)
-        bpy.ops.wm.obj_export(filepath=final_path)
-        print(f"Finished. Combined {len(obj_files)} files into {final_path}")
+    final_path = os.path.join(directory, output_file)
+    bpy.ops.wm.obj_export(filepath=final_path)
+    print(f"Finished. Combined {len(obj_files)} files into {final_path}")
 
 if __name__ == "__main__": main()
