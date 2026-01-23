@@ -156,10 +156,11 @@ def main():
         bpy.ops.wm.obj_import(filepath=path_to_file)
         imported_objects.extend(bpy.context.selected_objects)
         if len(imported_objects) > 1:
-            for obj in imported_objects:
-                if obj in bpy.data.objects:
-                    obj = bpy.data.object[obj]
-                    obj.select_set(True)
+            #for obj in imported_objects:
+#                if obj in bpy.data.objects:
+                #if obj in bpy.data.objects:
+                    #obj = bpy.data.objects[obj]
+                    #obj.select_set(True)
             bpy.context.view_layer.objects.active = imported_objects[0]
             bpy.ops.object.join()
             bpy.context.view_layer.objects.active.name = "FinalObject"
