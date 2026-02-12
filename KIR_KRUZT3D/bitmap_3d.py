@@ -118,6 +118,14 @@ def main():
             print("skip color", rgb, "no masked pixels"); continue
         name = f"color_{rgb[0]}_{rgb[1]}_{rgb[2]}"
         obj = build_grid_mesh(name, grid, wpts, hpts, sample)
+        x_coord = px
+        y_coord = py
+        z_coord = 1.0 # Z-coordinate is necessary in 3D space
+        bpy.ops.mesh.primitive_cube_add(
+            enter_editmode=False,
+            align='WORLD',
+            location=(x_coord, y_coord, z_coord)
+        )
         bpy.context.view_layer.update()
         bbox=[Vector(b) for b in obj.bound_box]
         minx=min(v.x for v in bbox); maxx=max(v.x for v in bbox); miny=min(v.y for v in bbox); maxy=max(v.y for v in bbox)
